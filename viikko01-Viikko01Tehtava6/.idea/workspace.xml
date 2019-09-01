@@ -2,8 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="86ca0c95-af16-4e8a-81c3-9b5ae604b909" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/viikko01_Viikko01Tehtava6.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/built-jar.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/Main.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/classes/Onnenluvut.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/test/classes/OnnenluvutTest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build_errors.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build_log.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/viikko01-Viikko01Tehtava6/Main.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/viikko01-Viikko01Tehtava6/Onnenluvut.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/test/viikko01-Viikko01Tehtava6/OnnenluvutTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Onnenluvut.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Onnenluvut.java" afterDir="false" />
     </list>
@@ -44,6 +51,13 @@
       <option name="presentableId" value="Default" />
       <updated>1567323070884</updated>
     </task>
+    <task id="LOCAL−00001" summary="Version 2">
+      <created>1567340375956</created>
+      <option name="number" value="LOCAL−00001" />
+      <option name="presentableId" value="LOCAL−00001" />
+      <updated>1567340375956</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -56,5 +70,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Version 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Version 2" />
   </component>
 </project>

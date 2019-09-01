@@ -5,6 +5,60 @@ import java.util.*;
 
 public class Onnenluvut {
     int laske(int a, int b) {
+        List list = new ArrayList<String>();
+        list.add("3");
+        list.add("7");
+
+
+        int added = 2;
+        for (int i = 0; i < 8; i++) {
+            List temp = new ArrayList<String>();
+
+            for (int j = 1; j <= added; j++) {
+                String new3 = list.get(list.size() - j).toString() + "3";
+                String new7 = list.get(list.size() - j).toString() + "7";
+                temp.add(new3);
+                temp.add(new7);
+            }
+
+            added *= 2;
+            list.addAll(temp);
+        }
+
+
+        int total = 0;
+        List finall = new ArrayList<String>();
+
+        list.forEach(item -> {
+            if (Integer.parseInt((String) item) >= a && Integer.parseInt((String) item) <= b) {
+                finall.add(item);
+            }
+        });
+
+        return finall.size();
+    }
+
+    int firstWay(int a, int b) {
+        long startTime = System.nanoTime();
+
+        int total = 0;
+        // int length = String.valueOf(b).length();
+        // Integer.parseInt("7".repeat(length))
+        for (int i = a; i <= b; i++) {
+            if (String.valueOf(i).toCharArray()[0] != '3' && String.valueOf(i).toCharArray()[0] != '7') {
+                continue;
+            } else if (String.valueOf(i).chars().mapToObj(z -> (char) z).allMatch(x -> x == '3' || x == '7')) {
+                total++;
+            }
+        }
+        long endTime = System.nanoTime();
+        long timeElapsed = endTime - startTime;
+        System.out.println("Execution time in milliseconds : " +
+                timeElapsed / 1000000);
+        return total;
+    }
+
+    int secondWay(int a, int b) {
         int total = 0;
         int maxLengthInt = String.valueOf(b).length();
         int minLengthInt = String.valueOf(a).length();
@@ -27,26 +81,6 @@ public class Onnenluvut {
 
             }
         }
-        return total;
-    }
-
-    int firstWay(int a, int b) {
-        long startTime = System.nanoTime();
-
-        int total = 0;
-        // int length = String.valueOf(b).length();
-        // Integer.parseInt("7".repeat(length))
-        for (int i = a; i <= b; i++) {
-            if (String.valueOf(i).toCharArray()[0] != '3' && String.valueOf(i).toCharArray()[0] != '7') {
-                continue;
-            } else if (String.valueOf(i).chars().mapToObj(z -> (char) z).allMatch(x -> x == '3' || x == '7')) {
-                total++;
-            }
-        }
-        long endTime = System.nanoTime();
-        long timeElapsed = endTime - startTime;
-        System.out.println("Execution time in milliseconds : " +
-                timeElapsed / 1000000);
         return total;
     }
 }
