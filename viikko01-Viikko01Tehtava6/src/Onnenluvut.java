@@ -4,7 +4,33 @@ import java.util.stream.Stream;
 import java.util.*;
 
 public class Onnenluvut {
+    int min, max, total;
     int laske(int a, int b) {
+        this.total = 0;
+        this.min = a;
+        this.max = b;
+
+        recursion("3", 9);
+        recursion("7", 9);
+        return this.total;
+    }
+
+    void recursion(String str, int times) {
+        if (times == 0) {
+            return;
+        } else {
+            int num = Integer.parseInt(str);
+            if (num >= this.min && num <= this.max) {
+                this.total++;
+            }
+            String new3 = str + "3";
+            String new7 = str + "7";
+            recursion(new3, times - 1);
+            recursion(new7, times - 1);
+        }
+    }
+
+    int workingWay1(int a, int b) {
         List list = new ArrayList<String>();
         list.add("3");
         list.add("7");
@@ -36,51 +62,5 @@ public class Onnenluvut {
         });
 
         return finall.size();
-    }
-
-    int firstWay(int a, int b) {
-        long startTime = System.nanoTime();
-
-        int total = 0;
-        // int length = String.valueOf(b).length();
-        // Integer.parseInt("7".repeat(length))
-        for (int i = a; i <= b; i++) {
-            if (String.valueOf(i).toCharArray()[0] != '3' && String.valueOf(i).toCharArray()[0] != '7') {
-                continue;
-            } else if (String.valueOf(i).chars().mapToObj(z -> (char) z).allMatch(x -> x == '3' || x == '7')) {
-                total++;
-            }
-        }
-        long endTime = System.nanoTime();
-        long timeElapsed = endTime - startTime;
-        System.out.println("Execution time in milliseconds : " +
-                timeElapsed / 1000000);
-        return total;
-    }
-
-    int secondWay(int a, int b) {
-        int total = 0;
-        int maxLengthInt = String.valueOf(b).length();
-        int minLengthInt = String.valueOf(a).length();
-
-        for (int i = minLengthInt; i <= maxLengthInt; i++) {
-            int added = 0;
-            int maxPosibilityCount = ((int) Math.pow(2, i));
-            for (int j = Integer.parseInt("3".repeat(i)); j <= Integer.parseInt("7".repeat(i)); j++) {
-
-                if ((String.valueOf(j).toCharArray()[0] != '3' && String.valueOf(j).toCharArray()[0] != '7') || j < a || j > b) {
-                    continue;
-                } else if (String.valueOf(j).chars().mapToObj(z -> (char) z).allMatch(x -> x == '3' || x == '7')) {
-                    total++;
-                    added++;
-
-                    if (added == maxPosibilityCount) {
-                        break;
-                    }
-                }
-
-            }
-        }
-        return total;
     }
 }

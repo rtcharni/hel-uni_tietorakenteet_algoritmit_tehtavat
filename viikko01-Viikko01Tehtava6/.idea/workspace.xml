@@ -2,16 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="86ca0c95-af16-4e8a-81c3-9b5ae604b909" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/build/built-jar.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/classes/Main.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/classes/Onnenluvut.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/test/classes/OnnenluvutTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build_errors.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build_log.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/viikko01-Viikko01Tehtava6/Main.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/viikko01-Viikko01Tehtava6/Onnenluvut.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/test/viikko01-Viikko01Tehtava6/OnnenluvutTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/built-jar.properties" beforeDir="false" afterPath="$PROJECT_DIR$/build/built-jar.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/Onnenluvut.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/Onnenluvut.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/viikko01-Viikko01Tehtava6/Onnenluvut.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/viikko01-Viikko01Tehtava6/Onnenluvut.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Onnenluvut.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Onnenluvut.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -65,7 +59,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
