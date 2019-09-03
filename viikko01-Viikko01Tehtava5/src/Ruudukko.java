@@ -11,31 +11,36 @@ public class Ruudukko {
                     table[i][j] = 0;
                 } else {
 
-                    int numToPut = 0;
-                    while (true) {
-                        start:
-                        for (int k = 0; k < j; k++) {
-                            if (numToPut == table[i][k]) {
-                                numToPut++;
-                                continue start;
-                            }
-                        }
+                    table[i][j] = recursion(i, j, table, 0);
 
-                        for (int q = 0; q < i; q++) {
-                            if (numToPut == table[q][j]) {
-                                numToPut++;
-                                continue start;
-                            }
-                        }
-
-                        if (gotTillEnd == true) {
-                            table[i][j] = numToPut;
-                            break;
-                        }
-                    }
                 }
             }
         }
         return table;
+    }
+
+    int recursion(int i, int j, int[][] table, int numToPut) {
+        // int numToPut = 0;
+        // while (true) {
+            for (int k = 0; k < j; k++) {
+                if (numToPut == table[i][k]) {
+                    int newNum = numToPut + 1;
+                    recursion(i, j, table, newNum);
+                    // continue start;
+                }
+            }
+            for (int q = 0; q < i; q++) {
+                if (numToPut == table[q][j]) {
+                    int newNum = numToPut + 1;
+                    recursion(i, j, table, newNum);
+                    // continue lol;
+                }
+            }
+
+            return numToPut;
+
+            // table[i][j] = numToPut;
+            // numToPut = 0;
+        // }
     }
 }
