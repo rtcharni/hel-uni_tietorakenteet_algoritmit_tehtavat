@@ -7,13 +7,21 @@ public class Kierrokset {
     int lol;
 
     int laske(int[] t) {
-        List list = Arrays.stream(t)
-                .boxed()
-                .collect(Collectors.toList());
+        int total = 1;
 
+        int[] newTable = new int[t.length];
 
-        recursion(list, 0, 0, 1);
-        return this.lol;
+        for (int i = 0; i < t.length; i++) {
+            newTable[t[i] - 1] = i;
+        }
+
+        for (int i = 1; i < newTable.length; i++) {
+            if (newTable[i - 1] > newTable[i]) {
+                total++;
+            }
+        }
+
+        return total;
 
 
     }
