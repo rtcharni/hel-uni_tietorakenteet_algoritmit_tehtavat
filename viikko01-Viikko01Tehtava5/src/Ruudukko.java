@@ -4,15 +4,34 @@ public class Ruudukko {
     int[][] muodosta(int n) {
         int [][] table = new int[n][n];
         // table[0][0] = 0;
-
+        boolean[] helper = new boolean[100];
         for (int i = 0; i < n; i++) {
+
             for (int j = 0; j < n; j++) {
+
                 if (i == 0 && j == 0) {
+                    //helper[0] = true;
                     table[i][j] = 0;
                 } else {
 
-                    table[i][j] = recursion(i, j, table, 0);
+                    for (int k = 0; k < j; k++) {
+                        helper[ table[i][k] ] = true;
+                    }
+                    for (int k = 0; k < i; k++) {
+                        helper[ table[k][j] ] = true;
+                    }
 
+                    for (int k = 0; k < helper.length; k++) {
+                        if (!helper[k]) {
+                            table[i][j] = k;
+                            helper = new boolean[100];
+                            break;
+                        }
+                    }
+
+
+
+                    //table[i][j] = recursion(i, j, table, 0);
                 }
             }
         }
