@@ -1,12 +1,17 @@
 import java.util.*;
 
-public class Polut {  
+public class Polut {
     int total;
+
     public int laske(int n) {
         total = 0;
         boolean[][] taulu = new boolean[n][n];
-        haku(0, 0, taulu, n, 1);
-        return total;
+        if (n == 1) {
+            return 1;
+        } else {
+            haku(0, 0, taulu, n, 1);
+            return total * 2;
+        }
     }
 
     void haku(int y, int x, boolean[][] taulu, int n, int askel) {
@@ -14,29 +19,51 @@ public class Polut {
             total++;
         } else {
             taulu[y][x] = true;
-            if (moveLeft(taulu, n, y, x)) {
-                //boolean[][] copy = deepCopy2(taulu);
-                //taulu[y][x - 1] = true;
-                haku(y, x - 1, taulu, n, askel + 1);
-            }
-            if (moveRight(taulu, n, y, x)) {
-                //boolean[][] copy = deepCopy2(taulu);
-                //taulu[y][x + 1] = true;
-                haku(y, x + 1, taulu, n, askel + 1);
-            }
-            if (moveUp(taulu, n, y, x)) {
-                //boolean[][] copy = deepCopy2(taulu);
-                //taulu[y - 1][x] = true;
-                haku(y - 1, x, taulu, n, askel + 1);
-            }
-            if (moveDown(taulu, n, y, x)) {
-                //boolean[][] copy = deepCopy2(taulu);
-                //taulu[y + 1][x] = true;
+            if (y == 0 && x == 0) {
                 haku(y + 1, x, taulu, n, askel + 1);
+            } else {
+                if (impossible(taulu, n, y, x)) {
+
+                } else {
+                    if (moveLeft(taulu, n, y, x)) {
+                        //boolean[][] copy = deepCopy2(taulu);
+                        //taulu[y][x - 1] = true;
+                        haku(y, x - 1, taulu, n, askel + 1);
+                    }
+                    if (moveRight(taulu, n, y, x)) {
+                        //boolean[][] copy = deepCopy2(taulu);
+                        //taulu[y][x + 1] = true;
+                        haku(y, x + 1, taulu, n, askel + 1);
+                    }
+                    if (moveUp(taulu, n, y, x)) {
+                        //boolean[][] copy = deepCopy2(taulu);
+                        //taulu[y - 1][x] = true;
+                        haku(y - 1, x, taulu, n, askel + 1);
+                    }
+                    if (moveDown(taulu, n, y, x)) {
+                        //boolean[][] copy = deepCopy2(taulu);
+                        //taulu[y + 1][x] = true;
+                        haku(y + 1, x, taulu, n, askel + 1);
+                    }
+                }
             }
             taulu[y][x] = false;
 
         }
+    }
+
+    boolean impossible(boolean[][] taulu, int length, int y, int x) {
+        boolean left = moveLeft(taulu, length, y, x);
+        boolean right = moveRight(taulu, length, y, x);
+        boolean up = moveUp(taulu, length, y, x);
+        boolean down = moveDown(taulu, length, y, x);
+
+        if (left && right && !up && !down) {
+            return true;
+        } else if (!left && !right && up && down) {
+            return true;
+        }
+        return false;
     }
 
     boolean moveLeft(boolean[][] taulu, int length, int y, int x) {
@@ -48,6 +75,7 @@ public class Polut {
         }
         return true;
     }
+
     boolean moveRight(boolean[][] taulu, int length, int y, int x) {
         if (x == length - 1) {
             return false;
@@ -57,6 +85,7 @@ public class Polut {
         }
         return true;
     }
+
     boolean moveUp(boolean[][] taulu, int length, int y, int x) {
         if (y == 0) {
             return false;
@@ -66,6 +95,7 @@ public class Polut {
         }
         return true;
     }
+
     boolean moveDown(boolean[][] taulu, int length, int y, int x) {
         if (y == length - 1) {
             return false;
