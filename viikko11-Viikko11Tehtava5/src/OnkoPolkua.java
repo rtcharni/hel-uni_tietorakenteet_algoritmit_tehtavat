@@ -23,6 +23,7 @@ public class OnkoPolkua {
         int kierros = 0;
         boolean negatiivinenSykli = false;
         while (true) {
+            System.out.println("Kierros: "+kierros);
             if (kierros == n +1 ) {
                 // Negatiivinen paino
                 negatiivinenSykli = true;
