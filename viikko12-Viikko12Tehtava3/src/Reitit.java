@@ -33,34 +33,21 @@ public class Reitit {
     }
 
     public long polut(int polkuun) {
-//        if (polkuun == 1) {
-//            return 1;
-//        }
-//        long total = 0;
-//        for(Kaari kaari : kaaret){
-//            if (kaari.loppu == n) {
-//                if (map.containsKey(kaari.loppu)) {
-//                    total += map.get(kaari.loppu);
-//                } else {
-//
-//                }
-//            }
-//        }
-//        return total;
         return 0;
     }
-
 
     public long laske() {
         long total = 0;
         for (Kaari kaari : kaaret) {
             if (kaari.loppu == n) {
-
                 if (map.containsKey(kaari.alku)) {
                     total += map.get(kaari.alku);
                 }
             }
         }
+//        if (map.containsKey(n)) {
+//            total += map.get(n);
+//        }
         return total;
     }
 
