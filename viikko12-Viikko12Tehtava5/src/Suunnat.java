@@ -12,10 +12,12 @@ public class Suunnat {
     int n;
     boolean[] oltuJo;
     boolean[][] matriisi;
+    boolean lisättySamaan;
 
     public Suunnat(int n) {
-        matriisi = new boolean[n+1][n+1];
-        oltuJo = new boolean[n+1];
+        lisättySamaan = false;
+        matriisi = new boolean[n + 1][n + 1];
+        oltuJo = new boolean[n + 1];
         sykliLöytyi = false;
         this.n = n;
         tämäKierros = new ArrayList<>();
@@ -31,15 +33,22 @@ public class Suunnat {
 
     public void lisaaKaari(int a, int b) {
 //        if (!verkot[a].contains(b)) {
-            verkot[a].add(b);
-            verkot[b].add(a);
+        verkot[a].add(b);
+        verkot[b].add(a);
+        if (a == b) {
+            lisättySamaan = true;
+        }
 //        }
     }
-    
-    public ArrayList<Kaari> muodosta() {
 
+    public ArrayList<Kaari> muodosta() {
+        if (lisättySamaan) {
+            return null;
+        }
+//        oltuJo[2] = true;
+//        syvyysHaku2(verkot[2], 2);
         for (int i = 1; i <= n; i++) {
-            if (verkot[i].size() > 0) {
+            if (verkot[i].size() > 0 && oltuJo[i] == false) {
                 oltuJo[i] = true;
                 syvyysHaku2(verkot[i], i);
             }
@@ -51,26 +60,21 @@ public class Suunnat {
     }
 
     void syvyysHaku2(ArrayList<Integer> verkko, int verkkoNum) {
-//        if (vierailtu2[verkkoNum] == true) {
-//            return;
-//        }
-//        vierailtu2[verkkoNum] = true;
-
         for (Integer k : verkko) {
             if (!oltuJo[k]) {
-//                if (!matriisi[verkkoNum][k] && !matriisi[k][verkkoNum]) {
-                    kaaret.add(new Kaari(verkkoNum, k));
-                    matriisi[verkkoNum][k] = true;
-//                    matriisi[k][verkkoNum] = true;
-//                }
-
+                kaaret.add(new Kaari(verkkoNum, k));
+                matriisi[verkkoNum][k] = true;
+                verkot[k].remove(Integer.valueOf(verkkoNum));
                 oltuJo[k] = true;
                 syvyysHaku2(verkot[k], k);
             } else {
-                if (!matriisi[verkkoNum][k] && !matriisi[k][verkkoNum]) {
-                    kaaret.add(new Kaari(k ,verkkoNum));
-                    matriisi[verkkoNum][k] = true;
+                if (matriisi[verkkoNum][k]) {
+                    kaaret.add(new Kaari(verkkoNum, k));
+                    verkot[k].remove(Integer.valueOf(verkkoNum));
+                } else {
+                    kaaret.add(new Kaari(k, verkkoNum));
                     matriisi[k][verkkoNum] = true;
+                    verkot[k].remove(Integer.valueOf(verkkoNum));
                 }
             }
         }
