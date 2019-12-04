@@ -2,11 +2,13 @@ import java.util.*;
 
 public class Reitit {
     ArrayList<Kaari> kaaret;
+    HashMap<Integer, ArrayList<Integer>> kaaretToisinPain;
     int n;
     HashMap<Integer, Long> map;
 
     public Reitit(int n) {
         kaaret = new ArrayList<>();
+        kaaretToisinPain = new HashMap<>();
         this.n = n;
         map = new HashMap<>();
         map.put(1, (long) 1);
@@ -14,41 +16,39 @@ public class Reitit {
 
     public void lisaaKaari(int a, int b) {
         kaaret.add(new Kaari(a, b));
-        if (map.containsKey(b)) {
-            long valmiitaReittejä = map.get(b);
-            if (map.containsKey(a)) {
-                long uusiaReittejä = map.get(a) + valmiitaReittejä;
-                map.put(b, uusiaReittejä);
-            } else {
-                map.put(b, valmiitaReittejä);
-            }
+        if (kaaretToisinPain.containsKey(b)) {
+            ArrayList temp = kaaretToisinPain.get(b);
+            temp.add(a);
+            kaaretToisinPain.put(b, temp);
         } else {
-            if (map.containsKey(a)) {
-                long reitit = map.get(a);
-                map.put(b, reitit);
-            } else {
-                map.put(b, (long) 0);
-            }
+            ArrayList<Integer> temp = new ArrayList<>();
+            temp.add(a);
+            kaaretToisinPain.put(b, temp);
         }
     }
 
-    public long polut(int polkuun) {
-        return 0;
+    long polut(int polkuun) {
+        if (polkuun == 1) {
+            return 1;
+        }
+        long total = 0;
+        if (!kaaretToisinPain.containsKey(polkuun)) {
+            return total;
+        }
+        for (Integer p : kaaretToisinPain.get(polkuun)) {
+            if (map.containsKey(p)) {
+                total += map.get(p);
+            } else {
+                long tempSum = polut(p);
+                map.put(p, tempSum);
+                total += polut(p);
+            }
+        }
+        return total;
     }
 
     public long laske() {
-        long total = 0;
-        for (Kaari kaari : kaaret) {
-            if (kaari.loppu == n) {
-                if (map.containsKey(kaari.alku)) {
-                    total += map.get(kaari.alku);
-                }
-            }
-        }
-//        if (map.containsKey(n)) {
-//            total += map.get(n);
-//        }
-        return total;
+        return polut(n);
     }
 
 }
