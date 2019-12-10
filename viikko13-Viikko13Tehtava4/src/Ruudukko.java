@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Ruudukko {
     boolean[][] lattia;
-    Piste[][] vanhempi;
+    Piste[][] edustajat;
     int[][] koko;
     int totalKomponentit;
     int totalRuudukoita;
@@ -13,12 +13,12 @@ public class Ruudukko {
         lattia = new boolean[n+1][n+1];
         totalRuudukoita = n * n;
         totalKomponentit = 0;
-        vanhempi = new Piste[n + 1][n + 1];
+        edustajat = new Piste[n + 1][n + 1];
         koko = new int[n + 1][n + 1];
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j <= n; j++) {
                 koko[i][j] = 1;
-                vanhempi[i][j] = new Piste(i,j);
+                edustajat[i][j] = new Piste(i,j);
             }
         }
     }
@@ -26,8 +26,6 @@ public class Ruudukko {
     
     public void teeLattia(int y, int x) {
         if (lattia[y][x] == false) {
-            // tee lattia, yhdistä viereisiin lattioihin
-//            koko[y][x] = 1;
             totalKomponentit++;
             lattia[y][x] = true;
             yhdistaKaikkiinYmparilla(y,x);
@@ -38,38 +36,27 @@ public class Ruudukko {
         return totalKomponentit;
     }
 
-    public Piste edustaja(int x, int xx) {
-        Piste p = new Piste(x,xx);
-//        while (x != vanhempi[x]) {
-//            x = vanhempi[x];
+    public Piste löydäEdustaja(int y, int x) {
+//        Piste p = new Piste(y,x);
+//        while (!(p.equals(edustajat[y][x]))) {
+//            p = edustajat[p.y][p.x];
 //        }
-
-        while (!(p.equals(vanhempi[x][xx]))) {
-            p = vanhempi[p.y][p.x];
-        }
-        return p;
+//        return p;
+        return edustajat[y][x];
     }
 
-    public boolean onkoSamaEdustaja(int y, int x, int yy, int xx) {
-        return vanhempi[y][x].equals(vanhempi[yy][xx]);
-    }
-
-    public void yhdista(int a, int aa, int b, int bb) {
-        Piste p = edustaja(a,aa);
-        Piste p2 = edustaja(b,bb);
+    public void yhdista(int y, int x, int y2, int x2) {
+        Piste p = löydäEdustaja(y,x);
+        Piste p2 = löydäEdustaja(y2,x2);
         if (p.equals(p2)) {
             return;
         }
-//        a = edustaja(a);
-//        b = edustaja(b);
-//        if (a == b) {
-//            return;
-//        }
+
         if (koko[p.y][p.x] < koko[p2.y][p2.x]) {
-            vanhempi[p.y][p.x] = new Piste(p2.y,p2.x);
+            edustajat[p.y][p.x] = p2; // new Piste(p2.y,p2.x);
             koko[p2.y][p2.x] += koko[p.y][p.x];
         } else {
-            vanhempi[p2.y][p2.x] = new Piste(p.y,p.x);
+            edustajat[p2.y][p2.x] = p; // new Piste(p.y,p.x);
             koko[p.y][p.x] += koko[p2.y][p2.x];
         }
         if (totalKomponentit == 1) {
@@ -82,7 +69,7 @@ public class Ruudukko {
         // vasen
         ArrayList<Piste> yhdistetytEdustajat = new ArrayList<>();
         if (x > 1 && lattia[y][x-1] == true) {
-            Piste p = vanhempi[y][x-1];
+            Piste p = edustajat[y][x-1];
             if (!yhdistetytEdustajat.contains(p)) {
                 yhdistetytEdustajat.add(p);
                 yhdista(y,x, y, x-1);
@@ -91,7 +78,7 @@ public class Ruudukko {
         }
         // oikea
         if (x < n && lattia[y][x+1] == true) {
-            Piste p = vanhempi[y][x+1];
+            Piste p = edustajat[y][x+1];
             if (!yhdistetytEdustajat.contains(p)) {
                 yhdistetytEdustajat.add(p);
                 yhdista(y,x, y, x+1);
@@ -100,7 +87,7 @@ public class Ruudukko {
         }
         // ylos
         if (y > 1 && lattia[y-1][x] == true) {
-            Piste p = vanhempi[y-1][x];
+            Piste p = edustajat[y-1][x];
             if (!yhdistetytEdustajat.contains(p)) {
                 yhdistetytEdustajat.add(p);
                 yhdista(y,x, y-1, x);
@@ -109,7 +96,7 @@ public class Ruudukko {
         }
         // alas
         if (y < n && lattia[y+1][x] == true) {
-            Piste p = vanhempi[y+1][x];
+            Piste p = edustajat[y+1][x];
             if (!yhdistetytEdustajat.contains(p)) {
                 yhdistetytEdustajat.add(p);
                 yhdista(y,x, y+1, x);
@@ -117,9 +104,7 @@ public class Ruudukko {
 //            yhdista(y,x, y+1, x);
         }
     }
-
 }
-//2435038764
 
 class Piste {
     int y, x;
